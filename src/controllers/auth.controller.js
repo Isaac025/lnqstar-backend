@@ -76,12 +76,9 @@ exports.register = async (req, res) => {
     });
 
     // 4. Send verification email (non-blocking)
-    try {
-      await sendVerificationEmail(user, verificationUrl(rawToken));
-    } catch (emailErr) {
-      console.error("⚠️  Verification email failed:", emailErr.message);
-    }
-
+    sendVerificationEmail(user, verificationUrl(rawToken)).catch((emailErr) => {
+      console.error("⚠️ Verification email failed:", emailErr.message);
+    });
     return ApiResponse.created(res, {
       message:
         "Registration successful! Please check your email to verify your account.",
