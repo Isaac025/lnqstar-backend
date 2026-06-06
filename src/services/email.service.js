@@ -1,16 +1,6 @@
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
-  port: Number(process.env.EMAIL_PORT),
-  secure: process.env.EMAIL_SECURE === "true",
-  family: 4,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
-
+const resend = new Resend(process.env.RESEND_API_KEY);
 // ── Base HTML wrapper ──────────────────────────────────────────────────────
 const baseTemplate = (content) => `
   <!DOCTYPE html>
@@ -55,7 +45,7 @@ const sendVerificationEmail = async (user, verificationUrl) => {
     <p>This link expires in <strong>24 hours</strong>. If you didn't create an account, you can safely ignore this email.</p>
   `);
 
-  await transporter.sendMail({
+  await resend.emails.send({
     from: process.env.EMAIL_FROM,
     to: user.email,
     subject: "✅ Verify Your FANLY Account",
@@ -75,7 +65,7 @@ const sendPasswordResetEmail = async (user, resetUrl) => {
     <p>If you didn't request a password reset, please ignore this email — your account is safe.</p>
   `);
 
-  await transporter.sendMail({
+  await resend.emails.send({
     from: process.env.EMAIL_FROM,
     to: user.email,
     subject: "🔐 Reset Your FANLY Password",
@@ -100,7 +90,7 @@ const sendWelcomeEmail = async (user) => {
     </div>
   `);
 
-  await transporter.sendMail({
+  await resend.emails.send({
     from: process.env.EMAIL_FROM,
     to: user.email,
     subject: "🌟 Welcome to FANLY!",
@@ -116,7 +106,7 @@ const sendPasswordChangedEmail = async (user) => {
     <p>If you did not make this change, please <a href="${process.env.CLIENT_URL}/auth/forgot-password" style="color:#c8a96e">reset your password immediately</a> or contact our support team.</p>
   `);
 
-  await transporter.sendMail({
+  await resend.emails.send({
     from: process.env.EMAIL_FROM,
     to: user.email,
     subject: "🔒 Your FANLY Password Was Changed",
