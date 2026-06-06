@@ -31,11 +31,11 @@ const baseTemplate = (content) => `
   </head>
   <body>
     <div class="wrapper">
-      <div class="header"><h1>⭐ LYNQSTAR</h1></div>
+      <div class="header"><h1>⭐ FANLY</h1></div>
       <div class="body">${content}</div>
       <div class="footer">
-        <p>© ${new Date().getFullYear()} LynqStar. All rights reserved.</p>
-        <p>You're receiving this because you signed up at lynqstar.com</p>
+        <p>© ${new Date().getFullYear()} FANLY. All rights reserved.</p>
+        <p>You're receiving this because you signed up at FANLY.com</p>
       </div>
     </div>
   </body>
@@ -46,7 +46,7 @@ const baseTemplate = (content) => `
 const sendVerificationEmail = async (user, verificationUrl) => {
   const html = baseTemplate(`
     <p>Hi <strong>${user.fullName}</strong>,</p>
-    <p>Welcome to <strong>LynqStar</strong> — your exclusive gateway to booking the world's biggest celebrities. 🌟</p>
+    <p>Welcome to <strong>FANLY</strong> — your exclusive gateway to booking the world's biggest celebrities. 🌟</p>
     <p>Please verify your email address to activate your account:</p>
     <div style="text-align:center">
       <a href="${verificationUrl}" class="btn">VERIFY MY EMAIL</a>
@@ -57,7 +57,7 @@ const sendVerificationEmail = async (user, verificationUrl) => {
   await transporter.sendMail({
     from: process.env.EMAIL_FROM,
     to: user.email,
-    subject: "✅ Verify Your LynqStar Account",
+    subject: "✅ Verify Your FANLY Account",
     html,
   });
 };
@@ -66,7 +66,7 @@ const sendVerificationEmail = async (user, verificationUrl) => {
 const sendPasswordResetEmail = async (user, resetUrl) => {
   const html = baseTemplate(`
     <p>Hi <strong>${user.fullName}</strong>,</p>
-    <p>We received a request to reset your LynqStar password.</p>
+    <p>We received a request to reset your FANLY password.</p>
     <p>Click the button below to set a new password. This link is valid for <strong>15 minutes</strong>.</p>
     <div style="text-align:center">
       <a href="${resetUrl}" class="btn">RESET MY PASSWORD</a>
@@ -77,7 +77,7 @@ const sendPasswordResetEmail = async (user, resetUrl) => {
   await transporter.sendMail({
     from: process.env.EMAIL_FROM,
     to: user.email,
-    subject: "🔐 Reset Your LynqStar Password",
+    subject: "🔐 Reset Your FANLY Password",
     html,
   });
 };
@@ -86,7 +86,7 @@ const sendPasswordResetEmail = async (user, resetUrl) => {
 const sendWelcomeEmail = async (user) => {
   const html = baseTemplate(`
     <p>Hi <strong>${user.fullName}</strong>,</p>
-    <p>Your email has been verified. Welcome to <strong>LynqStar</strong>! 🎉</p>
+    <p>Your email has been verified. Welcome to <strong>FANLY</strong>! 🎉</p>
     <p>You can now:</p>
     <ul style="color:#ccc; line-height:2">
       <li>🌟 Browse and book your favourite celebrities</li>
@@ -102,7 +102,7 @@ const sendWelcomeEmail = async (user) => {
   await transporter.sendMail({
     from: process.env.EMAIL_FROM,
     to: user.email,
-    subject: "🌟 Welcome to LynqStar!",
+    subject: "🌟 Welcome to FANLY!",
     html,
   });
 };
@@ -111,14 +111,14 @@ const sendWelcomeEmail = async (user) => {
 const sendPasswordChangedEmail = async (user) => {
   const html = baseTemplate(`
     <p>Hi <strong>${user.fullName}</strong>,</p>
-    <p>Your LynqStar password was successfully changed.</p>
+    <p>Your FANLY password was successfully changed.</p>
     <p>If you did not make this change, please <a href="${process.env.CLIENT_URL}/auth/forgot-password" style="color:#c8a96e">reset your password immediately</a> or contact our support team.</p>
   `);
 
   await transporter.sendMail({
     from: process.env.EMAIL_FROM,
     to: user.email,
-    subject: "🔒 Your LynqStar Password Was Changed",
+    subject: "🔒 Your FANLY Password Was Changed",
     html,
   });
 };
